@@ -2,7 +2,11 @@
 
 ## About cefrpy
 
+[![Unit Tests](https://github.com/Maximax67/cefrpy/actions/workflows/unittest.yml/badge.svg)](https://github.com/Maximax67/cefrpy/actions/workflows/unittest.yml)
+
 The cefrpy python module offers a comprehensive toolkit for analyzing linguistic data based on the Common European Framework of Reference for Languages (CEFR).
+
+Documentation: https://maximax67.github.io/cefrpy/
 
 ## Installation
 
