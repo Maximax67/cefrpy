@@ -10,10 +10,13 @@ Welcome to cefrpy's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   docs.md
+   modules
+
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 
-.. mdinclude:: ./docs.md
+.. mdinclude:: docs.md
