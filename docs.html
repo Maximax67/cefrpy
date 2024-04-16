@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About cefrpy &mdash; cefrpy 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="cefrpy" href="modules.html" />
+    <link rel="prev" title="Welcome to cefrpy’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cefrpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">About cefrpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#usage-examples">Usage examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-part-of-speech-level-of-a-word">Getting part of speech level of a word</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-average-level-of-a-word">Getting average level of a word:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recommended-usage-with-spacy">Recommended usage with spaCy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#import-spacy-and-load-model">Import spacy and load model:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#analyze-any-text">Analyze any text</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get-more-statistical-information">Get more statistical information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#additional-features">Additional features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#get-all-possible-part-of-speech-tags-for-a-word">Get all possible part-of-speech tags for a word</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#checking-if-a-word-exists-in-the-database">Checking if a word exists in the database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#checking-if-a-word-with-a-specific-part-of-speech-exists-in-the-database">Checking if a word with a specific part-of-speech exists in the database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#postag-usage-examples">POSTag usage examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cefrlevel-usage-examples">CEFRLevel usage examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#yields-cefranalyzer-methods">Yields CEFRAnalyzer methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iterating-over-words-with-a-specific-length-alphabetical-order">Iterating over words with a specific length (alphabetical order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iterating-over-words-with-a-specific-length-reversed-alphabetical-order">Iterating over words with a specific length (reversed alphabetical order)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iterating-over-words-in-alphabetical-order">Iterating over words in alphabetical order</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iterating-over-words-with-their-pos-in-alphabetical-order-with-word-length-priority-ascending">Iterating over words with their pos in alphabetical order with word length priority ascending</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iterating-over-words-with-their-pos-as-str-and-levels-as-float-in-reversed-alphabetical-order-with-word-length-priority-descending">Iterating over words with their pos as str and levels as float in reversed alphabetical order with word length priority descending</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#license">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">cefrpy</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cefrpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">About cefrpy</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/docs.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="about-cefrpy">
+<h1>About cefrpy<a class="headerlink" href="#about-cefrpy" title="Link to this heading"></a></h1>
+<p>The cefrpy python module offers a comprehensive toolkit for analyzing linguistic data based on the Common European Framework of Reference for Languages (CEFR).</p>
+</section>
+<section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+<p>You can install <code class="docutils literal notranslate"><span class="pre">cefrpy</span></code> for Python &gt;= 3.6 via pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>cefrpy
+</pre></div>
+</div>
+</section>
+<section id="usage-examples">
+<h1>Usage examples<a class="headerlink" href="#usage-examples" title="Link to this heading"></a></h1>
+<section id="getting-part-of-speech-level-of-a-word">
+<h2>Getting part of speech level of a word<a class="headerlink" href="#getting-part-of-speech-level-of-a-word" title="Link to this heading"></a></h2>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cefrpy</span> <span class="kn">import</span> <span class="n">CEFRAnalyzer</span>
+
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">CEFRAnalyzer</span><span class="p">()</span>
+
+<span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;happy&quot;</span>
+<span class="n">pos_tag</span> <span class="o">=</span> <span class="s2">&quot;JJ&quot;</span>  <span class="c1"># Adjective</span>
+<span class="n">level</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">get_word_pos_level_float</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">pos_tag</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The level of &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; as a </span><span class="si">{</span><span class="n">pos_tag</span><span class="si">}</span><span class="s2"> is: </span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Level not found for &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; a </span><span class="si">{</span><span class="n">pos_tag</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># You can also get the level in CEFR format</span>
+<span class="n">cefr_level</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">get_word_pos_level_CEFR</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">pos_tag</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">cefr_level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The CEFR level of &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; as a </span><span class="si">{</span><span class="n">pos_tag</span><span class="si">}</span><span class="s2"> is: </span><span class="si">{</span><span class="n">cefr_level</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CEFR level not found for &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; as a </span><span class="si">{</span><span class="n">pos_tag</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="getting-average-level-of-a-word">
+<h2>Getting average level of a word:<a class="headerlink" href="#getting-average-level-of-a-word" title="Link to this heading"></a></h2>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cefrpy</span> <span class="kn">import</span> <span class="n">CEFRAnalyzer</span>
+
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">CEFRAnalyzer</span><span class="p">()</span>
+
+<span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;supremacy&quot;</span>
+<span class="n">average_level</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">get_average_word_level_float</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">average_level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The average level of &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; is: </span><span class="si">{</span><span class="n">average_level</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average level not found for &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># You can also get the average level in CEFR format</span>
+<span class="n">cefr_average_level</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">get_average_word_level_CEFR</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">cefr_average_level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The CEFR average level of &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; is: </span><span class="si">{</span><span class="n">cefr_average_level</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CEFR average level not found for &#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="recommended-usage-with-spacy">
+<h2>Recommended usage with <a class="reference external" href="https://spacy.io">spaCy</a><a class="headerlink" href="#recommended-usage-with-spacy" title="Link to this heading"></a></h2>
+<section id="import-spacy-and-load-model">
+<h3>Import spacy and load model:<a class="headerlink" href="#import-spacy-and-load-model" title="Link to this heading"></a></h3>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="kn">from</span> <span class="nn">cefrpy</span> <span class="kn">import</span> <span class="n">CEFRSpaCyAnalyzer</span><span class="p">,</span> <span class="n">CEFRLevel</span>
+
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="analyze-any-text">
+<h3>Analyze any text<a class="headerlink" href="#analyze-any-text" title="Link to this heading"></a></h3>
+<p>Optionally supports custom abbreviation mapping and exclusion of specific <a class="reference external" href="https://spacy.io">spaCy</a> entity types (such as names of people, languages, countries, cities, etc.) from CEFR level matching.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># Source: ChatGPT 3.5</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">In the heart of every forest, a hidden world thrives among the towering trees. Trees,</span>
+<span class="s2">those silent giants, are more than just passive observers of nature&#39;s drama; they are</span>
+<span class="s2">active participants in an intricate dance of life.</span>
+
+<span class="s2">Did you know that trees communicate with each other? It&#39;s not through words or gestures</span>
+<span class="s2">like ours, but rather through a complex network of fungi that connect their roots</span>
+<span class="s2">underground. This network, often called the &quot;wood wide web,&quot; allows trees to share</span>
+<span class="s2">nutrients, water, and even warnings about potential threats.</span>
+
+<span class="s2">But trees are not just generous benefactors; they are also masters of adaptation. Take</span>
+<span class="s2">the mighty sequoias, for example, towering giants that have stood the test of time for</span>
+<span class="s2">thousands of years. These giants have evolved thick, fire-resistant bark to withstand</span>
+<span class="s2">the frequent wildfires of their native California.</span>
+
+<span class="s2">And speaking of longevity, did you know that some trees have been around for centuries,</span>
+<span class="s2">witnessing history unfold? The ancient bristlecone pines of the American West, for</span>
+<span class="s2">instance, can live for over 5,000 years, making them some of the oldest living organisms</span>
+<span class="s2">on Earth.</span>
+
+<span class="s2">So the next time you find yourself wandering through a forest, take a moment to appreciate</span>
+<span class="s2">the remarkable world of trees. They may seem like silent spectators, but their lives are</span>
+<span class="s2">full of fascinating stories waiting to be discovered.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">ABBREVIATION_MAPPING</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;&#39;m&quot;</span><span class="p">:</span> <span class="s2">&quot;am&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;&#39;s&quot;</span><span class="p">:</span> <span class="s2">&quot;is&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;&#39;re&quot;</span><span class="p">:</span> <span class="s2">&quot;are&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;&#39;ve&quot;</span><span class="p">:</span> <span class="s2">&quot;have&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;&#39;d&quot;</span><span class="p">:</span> <span class="s2">&quot;had&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;n&#39;t&quot;</span><span class="p">:</span> <span class="s2">&quot;not&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;&#39;ll&quot;</span><span class="p">:</span> <span class="s2">&quot;will&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># Optional. List of all possible spaCY entity types:</span>
+<span class="c1"># &#39;CARDINAL&#39;, &#39;DATE&#39;, &#39;EVENT&#39;, &#39;FAC&#39;, &#39;GPE&#39;, &#39;LANGUAGE&#39;, &#39;LAW&#39;, &#39;LOC&#39;, &#39;MONEY&#39;,</span>
+<span class="c1"># &#39;NORP&#39;, &#39;ORDINAL&#39;, &#39;ORG&#39;, &#39;PERCENT&#39;, &#39;PERSON&#39;, &#39;PRODUCT&#39;, &#39;QUANTITY&#39;, &#39;TIME&#39;,</span>
+<span class="c1"># &#39;WORK_OF_ART&#39;</span>
+<span class="n">ENTITY_TYPES_TO_SKIP_CEFR</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;QUANTITY&#39;</span><span class="p">,</span> <span class="s1">&#39;MONEY&#39;</span><span class="p">,</span> <span class="s1">&#39;LANGUAGE&#39;</span><span class="p">,</span> <span class="s1">&#39;LAW&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;WORK_OF_ART&#39;</span><span class="p">,</span> <span class="s1">&#39;PRODUCT&#39;</span><span class="p">,</span> <span class="s1">&#39;GPE&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ORG&#39;</span><span class="p">,</span> <span class="s1">&#39;FAC&#39;</span><span class="p">,</span> <span class="s1">&#39;PERSON&#39;</span>
+<span class="p">}</span>
+
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">text_analyzer</span> <span class="o">=</span> <span class="n">CEFRSpaCyAnalyzer</span><span class="p">(</span><span class="n">entity_types_to_skip</span><span class="o">=</span><span class="n">ENTITY_TYPES_TO_SKIP_CEFR</span><span class="p">,</span> <span class="n">abbreviation_mapping</span><span class="o">=</span><span class="n">ABBREVIATION_MAPPING</span><span class="p">)</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">text_analyzer</span><span class="o">.</span><span class="n">analize_doc</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="s2">&quot;WORD&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">26</span><span class="p">)</span><span class="si">}</span><span class="se">\t</span><span class="s1">POS</span><span class="se">\t</span><span class="s1">LEVEL</span><span class="se">\t</span><span class="s1">CEFR&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+    <span class="n">word</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">is_skipped</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">token</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">word</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">26</span><span class="p">)</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="s2">&quot;Skip&quot;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_skipped</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">level</span><span class="p">)</span><span class="si">}</span><span class="se">\t</span><span class="si">{</span><span class="n">CEFRLevel</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">level</span><span class="p">))</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">level</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="kc">None</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Result (truncated):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-------------------------------------------------------</span>
+ <span class="n">WORD</span>                        <span class="n">POS</span>     <span class="n">LEVEL</span>   <span class="n">CEFR</span>
+<span class="o">-------------------------------------------------------</span>
+                             <span class="n">_SP</span>     <span class="n">Skip</span>    <span class="kc">None</span>
+<span class="n">In</span>                           <span class="n">IN</span>      <span class="mf">1.00</span>    <span class="n">A1</span>
+<span class="n">the</span>                          <span class="n">DT</span>      <span class="mf">1.00</span>    <span class="n">A1</span>
+<span class="n">heart</span>                        <span class="n">NN</span>      <span class="mf">1.00</span>    <span class="n">A1</span>
+<span class="n">of</span>                           <span class="n">IN</span>      <span class="mf">1.00</span>    <span class="n">A1</span>
+<span class="n">every</span>                        <span class="n">DT</span>      <span class="mf">1.00</span>    <span class="n">A1</span>
+<span class="n">forest</span>                       <span class="n">NN</span>      <span class="mf">2.00</span>    <span class="n">A2</span>
+<span class="p">,</span>                            <span class="p">,</span>       <span class="n">Skip</span>    <span class="kc">None</span>
+<span class="n">a</span>                            <span class="n">DT</span>      <span class="mf">1.00</span>    <span class="n">A1</span>
+<span class="n">hidden</span>                       <span class="n">JJ</span>      <span class="mf">3.00</span>    <span class="n">B1</span>
+<span class="n">world</span>                        <span class="n">NN</span>      <span class="mf">1.00</span>    <span class="n">A1</span>
+<span class="n">thrives</span>                      <span class="n">VBZ</span>     <span class="mf">5.86</span>    <span class="n">C2</span>
+<span class="n">among</span>                        <span class="n">IN</span>      <span class="mf">2.00</span>    <span class="n">A2</span>
+<span class="n">the</span>                          <span class="n">DT</span>      <span class="mf">1.00</span>    <span class="n">A1</span>
+<span class="n">towering</span>                     <span class="n">VBG</span>     <span class="mf">1.00</span>    <span class="n">A1</span>
+<span class="n">trees</span>                        <span class="n">NNS</span>     <span class="mf">1.00</span>    <span class="n">A1</span>
+<span class="o">.</span>                            <span class="o">.</span>       <span class="n">Skip</span>    <span class="kc">None</span>
+<span class="n">Trees</span>                        <span class="n">NNS</span>     <span class="mf">1.00</span>    <span class="n">A1</span>
+<span class="p">,</span>                            <span class="p">,</span>       <span class="n">Skip</span>    <span class="kc">None</span>
+                             <span class="n">_SP</span>     <span class="n">Skip</span>    <span class="kc">None</span>
+<span class="n">those</span>                        <span class="n">DT</span>      <span class="mf">1.00</span>    <span class="n">A1</span>
+<span class="n">silent</span>                       <span class="n">JJ</span>      <span class="mf">3.00</span>    <span class="n">B1</span>
+</pre></div>
+</div>
+</section>
+<section id="get-more-statistical-information">
+<h3>Get more statistical information<a class="headerlink" href="#get-more-statistical-information" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Filter tokens by level:</p></li>
+</ol>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">filter_for_desired_level</span><span class="p">(</span><span class="n">level_tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span>
+                            <span class="n">min_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">max_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">=</span> <span class="mf">6.0</span>
+                            <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+    <span class="n">filtered_tokens</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">level_tokens</span><span class="p">:</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="n">token</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">level</span> <span class="ow">and</span> <span class="n">level</span> <span class="o">&gt;=</span> <span class="n">min_level</span> <span class="ow">and</span> <span class="n">level</span> <span class="o">&lt;=</span> <span class="n">max_level</span><span class="p">:</span>
+            <span class="n">filtered_tokens</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">filtered_tokens</span>
+
+
+<span class="c1"># You can also set min/max level as an int or float in range from 1 to 6</span>
+<span class="n">desired_min_level</span> <span class="o">=</span> <span class="n">CEFRLevel</span><span class="o">.</span><span class="n">C1</span>
+<span class="n">desired_level_words_set</span> <span class="o">=</span> <span class="n">filter_for_desired_level</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">min_level</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">desired_min_level</span><span class="p">))</span>
+
+<span class="n">desired_level_words_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">desired_level_words_set</span><span class="p">)</span>
+<span class="n">desired_level_words_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">Words with level </span><span class="si">{</span><span class="n">desired_min_level</span><span class="si">}</span><span class="s1"> and higher: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">desired_level_words_list</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">word_data</span> <span class="ow">in</span> <span class="n">desired_level_words_list</span><span class="p">:</span>
+    <span class="n">word</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">level</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">word_data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">word</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">26</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">pos</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">level</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">CEFRLevel</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">level</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Words</span> <span class="k">with</span> <span class="n">level</span> <span class="n">B2</span> <span class="ow">and</span> <span class="n">higher</span><span class="p">:</span> <span class="mi">16</span>
+<span class="n">benefactors</span>                <span class="n">NNS</span>    <span class="mf">6.00</span>   <span class="n">C2</span>
+<span class="n">bristlecone</span>                <span class="n">NN</span>     <span class="mf">6.00</span>   <span class="n">C2</span>
+<span class="n">evolved</span>                    <span class="n">VBN</span>    <span class="mf">4.00</span>   <span class="n">B2</span>
+<span class="n">fungi</span>                      <span class="n">NNS</span>    <span class="mf">5.20</span>   <span class="n">C1</span>
+<span class="n">living</span>                     <span class="n">NN</span>     <span class="mf">4.00</span>   <span class="n">B2</span>
+<span class="n">longevity</span>                  <span class="n">NN</span>     <span class="mf">5.96</span>   <span class="n">C2</span>
+<span class="n">masters</span>                    <span class="n">NNS</span>    <span class="mf">4.00</span>   <span class="n">B2</span>
+<span class="n">mighty</span>                     <span class="n">JJ</span>     <span class="mf">4.00</span>   <span class="n">B2</span>
+<span class="n">observers</span>                  <span class="n">NNS</span>    <span class="mf">4.00</span>   <span class="n">B2</span>
+<span class="n">pines</span>                      <span class="n">NNS</span>    <span class="mf">4.00</span>   <span class="n">B2</span>
+<span class="n">potential</span>                  <span class="n">JJ</span>     <span class="mf">4.00</span>   <span class="n">B2</span>
+<span class="n">sequoias</span>                   <span class="n">NNS</span>    <span class="mf">6.00</span>   <span class="n">C2</span>
+<span class="n">thrives</span>                    <span class="n">VBZ</span>    <span class="mf">5.86</span>   <span class="n">C2</span>
+<span class="n">underground</span>                <span class="n">RB</span>     <span class="mf">4.00</span>   <span class="n">B2</span>
+<span class="n">wildfires</span>                  <span class="n">NNS</span>    <span class="mf">6.00</span>   <span class="n">C2</span>
+<span class="n">withstand</span>                  <span class="n">VB</span>     <span class="mf">5.12</span>   <span class="n">C1</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Get CEFR statistic of the text:</p></li>
+</ol>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_word_level_count_statistic</span><span class="p">(</span><span class="n">level_tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="n">difficulty_levels_count</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">level_tokens</span><span class="p">:</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="n">token</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">level</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">level_round</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+        <span class="n">difficulty_levels_count</span><span class="p">[</span><span class="n">level_round</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">difficulty_levels_count</span>
+
+<span class="n">difficulty_levels_count</span> <span class="o">=</span> <span class="n">get_word_level_count_statistic</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CEFR statistic (total words):&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">CEFRLevel</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">difficulty_levels_count</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CEFR</span> <span class="n">statistic</span> <span class="p">(</span><span class="n">total</span> <span class="n">words</span><span class="p">):</span>
+<span class="n">A1</span><span class="p">:</span> <span class="mi">136</span>
+<span class="n">A2</span><span class="p">:</span> <span class="mi">36</span>
+<span class="n">B1</span><span class="p">:</span> <span class="mi">27</span>
+<span class="n">B2</span><span class="p">:</span> <span class="mi">11</span>
+<span class="n">C1</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">C2</span><span class="p">:</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Get CEFR statistic for unique words in the text:</p></li>
+</ol>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_word_level_count_statistic_unique</span><span class="p">(</span><span class="n">level_tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="n">processed_word_pos_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">difficulty_levels_count</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">level_tokens</span><span class="p">:</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="n">token</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">level</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">to_check_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="n">token</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">token</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">to_check_tuple</span> <span class="ow">in</span> <span class="n">processed_word_pos_set</span><span class="p">:</span>
+            <span class="n">level_round</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">token</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+            <span class="n">difficulty_levels_count</span><span class="p">[</span><span class="n">level_round</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">processed_word_pos_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">to_check_tuple</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">difficulty_levels_count</span>
+
+
+<span class="n">difficulty_levels_count_unique</span> <span class="o">=</span> <span class="n">get_word_level_count_statistic_unique</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CEFR statistic (unique words):&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">CEFRLevel</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">difficulty_levels_count_unique</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CEFR</span> <span class="n">statistic</span> <span class="p">(</span><span class="n">unique</span> <span class="n">words</span><span class="p">):</span>
+<span class="n">A1</span><span class="p">:</span> <span class="mi">77</span>
+<span class="n">A2</span><span class="p">:</span> <span class="mi">33</span>
+<span class="n">B1</span><span class="p">:</span> <span class="mi">23</span>
+<span class="n">B2</span><span class="p">:</span> <span class="mi">11</span>
+<span class="n">C1</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">C2</span><span class="p">:</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Get set of not found CEFR levels for words in text:</p></li>
+</ol>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_not_found_words</span><span class="p">(</span><span class="n">level_tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="n">not_found_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">level_tokens</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">token</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="k">continue</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+            <span class="n">not_found_words</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">token</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">not_found_words</span>
+
+
+<span class="n">not_found_words_set</span> <span class="o">=</span> <span class="n">get_not_found_words</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<span class="n">not_found_words_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">not_found_words_set</span><span class="p">)</span>
+<span class="n">not_found_words_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not found words:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">not_found_words_list</span><span class="p">))</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">not_found_words_list</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">not_found_words_list</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Not</span> <span class="n">found</span> <span class="n">words</span><span class="p">:</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="additional-features">
+<h1>Additional features<a class="headerlink" href="#additional-features" title="Link to this heading"></a></h1>
+<section id="get-all-possible-part-of-speech-tags-for-a-word">
+<h2>Get all possible part-of-speech tags for a word<a class="headerlink" href="#get-all-possible-part-of-speech-tags-for-a-word" title="Link to this heading"></a></h2>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cefrpy</span> <span class="kn">import</span> <span class="n">CEFRAnalyzer</span>
+
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">CEFRAnalyzer</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">analyzer</span><span class="o">.</span><span class="n">get_all_pos_for_word</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">))</span> <span class="c1"># [&lt;POSTag.JJ: 4&gt;, &lt;POSTag.NN: 8&gt;, &lt;POSTag.VB: 19&gt;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">analyzer</span><span class="o">.</span><span class="n">get_all_pos_for_word_as_str</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">))</span> <span class="c1"># [&#39;JJ&#39;, &#39;NN&#39;]</span>
+
+<span class="c1"># {&lt;POSTag.JJ: 4&gt;: &lt;CEFRLevel.A2: 2&gt;, &lt;POSTag.NN: 8&gt;: &lt;CEFRLevel.A1: 1&gt;, &lt;POSTag.VB: 19&gt;: &lt;CEFRLevel.B2: 4&gt;}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">analyzer</span><span class="o">.</span><span class="n">get_pos_level_dict_for_word</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">))</span>
+
+<span class="c1"># {&#39;JJ&#39;: 2.5, &#39;NN&#39;: 1.0, &#39;VB&#39;: 4.0}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">analyzer</span><span class="o">.</span><span class="n">get_pos_level_dict_for_word</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">pos_tag_as_string</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">word_level_as_float</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="checking-if-a-word-exists-in-the-database">
+<h2>Checking if a word exists in the database<a class="headerlink" href="#checking-if-a-word-exists-in-the-database" title="Link to this heading"></a></h2>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cefrpy</span> <span class="kn">import</span> <span class="n">CEFRAnalyzer</span>
+
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">CEFRAnalyzer</span><span class="p">()</span>
+
+<span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;apple&quot;</span>
+<span class="k">if</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">is_word_in_database</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; exists in the database.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; does not exist in the database.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="checking-if-a-word-with-a-specific-part-of-speech-exists-in-the-database">
+<h2>Checking if a word with a specific part-of-speech exists in the database<a class="headerlink" href="#checking-if-a-word-with-a-specific-part-of-speech-exists-in-the-database" title="Link to this heading"></a></h2>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cefrpy</span> <span class="kn">import</span> <span class="n">CEFRAnalyzer</span>
+
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">CEFRAnalyzer</span><span class="p">()</span>
+
+<span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;run&quot;</span>
+<span class="n">pos_tag</span> <span class="o">=</span> <span class="s2">&quot;VB&quot;</span>  <span class="c1"># Verb</span>
+<span class="k">if</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">is_word_pos_id_database</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">pos_tag</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; with part of speech &#39;</span><span class="si">{</span><span class="n">pos_tag</span><span class="si">}</span><span class="s2">&#39; exists in the database.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">&#39; with part of speech &#39;</span><span class="si">{</span><span class="n">pos_tag</span><span class="si">}</span><span class="s2">&#39; does not exist in the database.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="postag-usage-examples">
+<h2>POSTag usage examples<a class="headerlink" href="#postag-usage-examples" title="Link to this heading"></a></h2>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cefrpy</span> <span class="kn">import</span> <span class="n">POSTag</span>
+
+<span class="c1"># Get list of all part-of-speech tag names</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">POSTag</span><span class="o">.</span><span class="n">get_all_tags</span><span class="p">())</span> <span class="c1"># [&#39;CC&#39;, &#39;CD&#39;, &#39;DT&#39;, ...]</span>
+
+<span class="c1"># Print total tags</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">POSTag</span><span class="o">.</span><span class="n">get_total_tags</span><span class="p">())</span> <span class="c1"># 28</span>
+
+<span class="c1"># Get description for a tag</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">POSTag</span><span class="o">.</span><span class="n">get_description_by_tag_name</span><span class="p">(</span><span class="s1">&#39;NN&#39;</span><span class="p">))</span> <span class="c1"># Noun, singular or mass</span>
+
+<span class="n">tag</span> <span class="o">=</span> <span class="n">POSTag</span><span class="o">.</span><span class="n">VB</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>                          <span class="c1"># VB</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">POSTag</span><span class="o">.</span><span class="n">get_description</span><span class="p">(</span><span class="n">tag</span><span class="p">))</span>  <span class="c1"># Verb, base form</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">tag</span><span class="p">))</span>                     <span class="c1"># 19 (unique tag id)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tag</span> <span class="o">==</span> <span class="n">POSTag</span><span class="o">.</span><span class="n">NN</span><span class="p">)</span>             <span class="c1"># False</span>
+</pre></div>
+</div>
+</section>
+<section id="cefrlevel-usage-examples">
+<h2>CEFRLevel usage examples<a class="headerlink" href="#cefrlevel-usage-examples" title="Link to this heading"></a></h2>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cefrpy</span> <span class="kn">import</span> <span class="n">CEFRLevel</span>
+
+<span class="n">level</span> <span class="o">=</span> <span class="n">CEFRLevel</span><span class="o">.</span><span class="n">A1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>            <span class="c1"># A1</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">level</span><span class="p">))</span>       <span class="c1"># 1</span>
+
+<span class="n">level2</span> <span class="o">=</span> <span class="n">CEFRLevel</span><span class="o">.</span><span class="n">C2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">level2</span><span class="p">)</span>           <span class="c1"># C2</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">level2</span><span class="p">))</span>      <span class="c1"># 6</span>
+
+<span class="c1"># You can perform any comparisons:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">level2</span> <span class="o">&gt;</span> <span class="n">level</span><span class="p">)</span>   <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">level2</span> <span class="o">==</span> <span class="n">level</span><span class="p">)</span>  <span class="c1"># False</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">CEFRLevel</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;B1&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">CEFRLevel</span><span class="o">.</span><span class="n">B1</span><span class="p">)</span> <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">CEFRLevel</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="s2">&quot;B1&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">CEFRLevel</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="c1"># True</span>
+</pre></div>
+</div>
+</section>
+<section id="yields-cefranalyzer-methods">
+<h2>Yields CEFRAnalyzer methods<a class="headerlink" href="#yields-cefranalyzer-methods" title="Link to this heading"></a></h2>
+<p>For every example you should import and initialize <code class="docutils literal notranslate"><span class="pre">CEFRAnalyzer</span></code>:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cefrpy</span> <span class="kn">import</span> <span class="n">CEFRAnalyzer</span>
+
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">CEFRAnalyzer</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="iterating-over-words-with-a-specific-length-alphabetical-order">
+<h3>Iterating over words with a specific length (alphabetical order)<a class="headerlink" href="#iterating-over-words-with-a-specific-length-alphabetical-order" title="Link to this heading"></a></h3>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">iteration_limit</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">word_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">yield_words_with_length</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">iteration_limit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">word_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="n">iteration_limit</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="c1"># [&#39;aaberg&#39;, &#39;aachen&#39;, &#39;aahing&#39;, &#39;aargau&#39;, &#39;aarhus&#39;, &#39;abacus&#39;, &#39;abadan&#39;, &#39;abadia&#39;, &#39;abakan&#39;, &#39;abaris&#39;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="iterating-over-words-with-a-specific-length-reversed-alphabetical-order">
+<h3>Iterating over words with a specific length (reversed alphabetical order)<a class="headerlink" href="#iterating-over-words-with-a-specific-length-reversed-alphabetical-order" title="Link to this heading"></a></h3>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">iteration_limit</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">word_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">yield_words_with_length</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">reverse_order</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">iteration_limit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">word_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="n">iteration_limit</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="c1"># [&#39;zymase&#39;, &#39;zygote&#39;, &#39;zygoma&#39;, &#39;zydeco&#39;, &#39;zwolle&#39;, &#39;zwicky&#39;, &#39;zuzana&#39;, &#39;zusman&#39;, &#39;zurvan&#39;, &#39;zurich&#39;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="iterating-over-words-in-alphabetical-order">
+<h3>Iterating over words in alphabetical order<a class="headerlink" href="#iterating-over-words-in-alphabetical-order" title="Link to this heading"></a></h3>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">iteration_limit</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">word_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">yield_words</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">iteration_limit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">word_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="n">iteration_limit</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="c1"># [&#39;a&#39;, &#39;aa&#39;, &#39;aaa&#39;, &#39;aaaa&#39;, &#39;aaas&#39;, &#39;aaberg&#39;, &#39;aachen&#39;, &#39;aae&#39;, &#39;aaee&#39;, &#39;aaf&#39;]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="iterating-over-words-with-their-pos-in-alphabetical-order-with-word-length-priority-ascending">
+<h3>Iterating over words with their pos in alphabetical order with word length priority ascending<a class="headerlink" href="#iterating-over-words-with-their-pos-in-alphabetical-order-with-word-length-priority-ascending" title="Link to this heading"></a></h3>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">iteration_limit</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">word_pos_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">pos_tag</span> <span class="ow">in</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">yield_word_pos</span><span class="p">(</span><span class="n">word_length_sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">iteration_limit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">word_pos_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">word</span><span class="p">,</span> <span class="n">pos_tag</span><span class="p">))</span>
+    <span class="n">iteration_limit</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="c1"># [(&#39;a&#39;, &lt;POSTag.DT: 2&gt;), (&#39;a&#39;, &lt;POSTag.IN: 3&gt;), (&#39;a&#39;, &lt;POSTag.JJ: 4&gt;), (&#39;a&#39;, &lt;POSTag.NN: 8&gt;), (&#39;a&#39;, &lt;POSTag.VB: 19&gt;), (&#39;b&#39;, &lt;POSTag.JJ: 4&gt;)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_pos_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="iterating-over-words-with-their-pos-as-str-and-levels-as-float-in-reversed-alphabetical-order-with-word-length-priority-descending">
+<h3>Iterating over words with their pos as str and levels as float in reversed alphabetical order with word length priority descending<a class="headerlink" href="#iterating-over-words-with-their-pos-as-str-and-levels-as-float-in-reversed-alphabetical-order-with-word-length-priority-descending" title="Link to this heading"></a></h3>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">iteration_limit</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">word_pos_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">pos_tag</span><span class="p">,</span> <span class="n">level</span> <span class="ow">in</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">yield_word_pos_level</span><span class="p">(</span><span class="n">word_length_sort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reverse_order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pos_tag_as_string</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">word_level_as_float</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">iteration_limit</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">word_pos_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">word</span><span class="p">,</span> <span class="n">pos_tag</span><span class="p">,</span> <span class="n">level</span><span class="p">))</span>
+    <span class="n">iteration_limit</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="c1"># [(&#39;demethylchlortetracycline&#39;, &#39;NN&#39;, 6.0), (&#39;electrocardiographically&#39;, &#39;RB&#39;, 6.0), (&#39;polytetrafluoroethylene&#39;, &#39;NN&#39;, 6.0)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_pos_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="license">
+<h1>License<a class="headerlink" href="#license" title="Link to this heading"></a></h1>
+<p>This project is licensed under the MIT License - see the LICENSE file for details.</p>
+</section>
+<section id="acknowledgments">
+<h1>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Link to this heading"></a></h1>
+<p>I would like to acknowledge the contributions of the following resources. I used them to create my initial SQLite version <a class="reference external" href="https://github.com/Maximax67/Words-CEFR-Dataset">Words-CEFR-Dataset</a>:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://spacy.io/">Spacy</a></p></li>
+<li><p><a class="reference external" href="https://cefr-j.org/">CEFR-J</a></p></li>
+<li><p><a class="reference external" href="https://github.com/bjascob/LemmInflect">LemmInflect</a></p></li>
+<li><p><a class="reference external" href="https://books.google.com/ngrams/">The Google Books Ngram Viewer (used 1-grams dataset, version 20200217)</a></p></li>
+<li><p><a class="reference external" href="https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html">List of pos tags form Penn Treebank Project</a></p></li>
+</ul>
+<p>Also I used these resources to create my <a class="reference external" href="https://github.com/Maximax67/English-Valid-Words">valid English words list</a>:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://web.archive.org/web/20131118073324/https://www.infochimps.com/datasets/word-list-350000-simple-english-words-excel-readable">Word list by infochimps (archived)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/dwyl/english-words">English words github repo by dwyl</a></p></li>
+<li><p><a class="reference external" href="https://www.nltk.org/">NLTK (Natural Language Toolkit)</a></p></li>
+<li><p><a class="reference external" href="https://wordnet.princeton.edu/">WordNet</a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to cefrpy’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="cefrpy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Maxim Belikov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
