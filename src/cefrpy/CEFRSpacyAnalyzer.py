@@ -38,12 +38,12 @@ class CEFRSpaCyAnalyzer():
         except StopIteration:
             return None
 
-    def _get_word_pos_tokens_set(self, tokens: list[tuple[str, str, bool]]) -> set[tuple[str, str]]:
-        """G
-        et unique word and POS tag tuples from tokens.
+    def _get_word_pos_tokens_set(self, tokens: list[tuple[str, str, str, bool, int, int]]) -> set[tuple[str, str]]:
+        """
+        Get unique word and POS tag tuples from tokens.
 
         Args:
-            tokens (list[tuple[str, str, bool]]): List of token tuples.
+            tokens (list[tuple[str, str, str, bool, int, int]]): List of token tuples.
 
         Returns:
             set[tuple[str, str]]: Set of unique word and POS tag tuples.
@@ -67,7 +67,7 @@ class CEFRSpaCyAnalyzer():
 
         return result_dict
 
-    def analize_doc(self, doc) -> list[str, str, bool, float, int, int]:
+    def analize_doc(self, doc) -> list[tuple[str, str, bool, float, int, int]]:
         """
         Analyze the document for CEFR levels, considering skipped entities and abbreviation mapping.
 
@@ -77,7 +77,6 @@ class CEFRSpaCyAnalyzer():
         Returns:
             list[tuple[str, str, bool, float, int, int]]: List of token tuples containing word, POS tag, skip status, CEFR level, start index, and end index.
         """
-
         self.tokens = []
 
         if len(self.entity_types_to_skip):
@@ -93,7 +92,7 @@ class CEFRSpaCyAnalyzer():
             token_end = token_start + len(token.text)
 
             if current_entity:
-                while current_entity and token_start > current_entity.start_char:
+                while current_entity and token_start > current_entity.end_char:
                     current_entity = self._get_next_entity(entities_iter)
 
                 if current_entity and current_entity.label_ in self.entity_types_to_skip \
@@ -122,7 +121,11 @@ class CEFRSpaCyAnalyzer():
 
         self.tokens = []
         for word, word_lower, word_pos, is_skipped, token_start, token_end in nlp_tokens:
-            level = word_pos_unique_level_tokens.get((word_lower, word_pos))
+            if is_skipped:
+                level = None
+            else:
+                level = word_pos_unique_level_tokens.get((word_lower, word_pos))
+
             self.tokens.append((word, word_pos, is_skipped, level, token_start, token_end))
 
         return self.tokens

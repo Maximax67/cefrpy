@@ -1,12 +1,18 @@
 # cefrpy
 
-## About cefrpy
-
+![PyPI - License](https://img.shields.io/pypi/l/cefrpy)
+![PyPI - Version](https://img.shields.io/pypi/v/cefrpy)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/cefrpy)
+[![Hugging Face Space](https://img.shields.io/badge/Hugging%20Face-Space-4CA6A7?logo=huggingface&style=flat)](https://huggingface.co/spaces/Maximax67/cefrpy-demo)
 [![Unit Tests](https://github.com/Maximax67/cefrpy/actions/workflows/unittest.yml/badge.svg)](https://github.com/Maximax67/cefrpy/actions/workflows/unittest.yml)
+
+## About cefrpy
 
 The cefrpy python module offers a comprehensive toolkit for analyzing linguistic data based on the Common European Framework of Reference for Languages (CEFR).
 
 Documentation: https://maximax67.github.io/cefrpy/
+
+HuggingFace demo: https://huggingface.co/spaces/Maximax67/cefrpy-demo
 
 ## Installation
 
@@ -314,36 +320,6 @@ if len(not_found_words_list):
 
 ```
 Not found words: 0
-```
-
-5. Get list of valid skipped words:
-
-```py
-def get_skipped_valid_words(level_tokens: list[tuple[str, str, bool, float, int, int]]) -> set[str]:
-    skipped_words = set()
-    for token in level_tokens:
-        if token[2]:
-            word = token[0]
-            if word.isalpha():
-                skipped_words.add(word)
-
-    return skipped_words
-
-skipped_words_set = get_skipped_valid_words(tokens)
-skipped_words_list = list(skipped_words_set)
-skipped_words_list.sort()
-
-print('Skipped words:', len(skipped_words_list))
-
-if len(skipped_words_list):
-    print('\n'.join(skipped_words_list))
-```
-
-The word 'California' was excluded due to its GPE [spaCy](https://spacy.io) entity tag, which we have configured to skip in `ENTITY_TYPES_TO_SKIP_CEFR`.
-
-```
-Skipped words: 1
-California
 ```
 
 ## License

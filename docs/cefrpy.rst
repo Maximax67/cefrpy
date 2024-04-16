@@ -44,10 +44,10 @@ cefrpy.CEFRLevel module
    :undoc-members:
    :show-inheritance:
 
-cefrpy.CEFRSpacyAnalyzer module
+cefrpy.CEFRSpaCyAnalyzer module
 -------------------------------
 
-.. automodule:: cefrpy.CEFRSpacyAnalyzer
+.. automodule:: cefrpy.CEFRSpaCyAnalyzer
    :members:
    :undoc-members:
    :show-inheritance:
