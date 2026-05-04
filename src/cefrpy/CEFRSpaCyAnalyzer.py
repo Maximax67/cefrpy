@@ -67,7 +67,7 @@ class CEFRSpaCyAnalyzer():
 
         return result_dict
 
-    def analize_doc(self, doc) -> list[tuple[str, str, bool, float, int, int]]:
+    def analyze_doc(self, doc) -> list[tuple[str, str, bool, float, int, int]]:
         """
         Analyze the document for CEFR levels, considering skipped entities and abbreviation mapping.
 

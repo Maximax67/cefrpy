@@ -135,7 +135,7 @@ ENTITY_TYPES_TO_SKIP_CEFR = {
 
 doc = nlp(text)
 text_analyzer = CEFRSpaCyAnalyzer(entity_types_to_skip=ENTITY_TYPES_TO_SKIP_CEFR, abbreviation_mapping=ABBREVIATION_MAPPING)
-tokens = text_analyzer.analize_doc(doc)
+tokens = text_analyzer.analyze_doc(doc)
 
 print('-' * 55)
 print(f' {"WORD".ljust(26)}\tPOS\tLEVEL\tCEFR')
