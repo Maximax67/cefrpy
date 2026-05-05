@@ -31,13 +31,16 @@ class CEFRDataReader:
             Exception: If the CEFR database file content is invalid.
         """
 
-        self.data_path = os.path.join(os.path.dirname(__file__), 'data.bin') if data_path is None else data_path
-        self._wlp = array.array('I')
+        self.data_path = (
+            os.path.join(os.path.dirname(__file__), "data.bin")
+            if data_path is None
+            else data_path
+        )
+        self._wlp = array.array("I")
         self._data_array = bytearray()
 
         if not self._read_data():
-            raise Exception(f'CEFR database file content is invalid: {self.data_path}')
-
+            raise Exception(f"CEFR database file content is invalid: {self.data_path}")
 
     def _read_data(self) -> bool:
         """
@@ -46,17 +49,16 @@ class CEFRDataReader:
         Returns:
             bool: True if the data is successfully read and valid, False otherwise.
         """
-        with open(self.data_path, 'rb') as file:
-            wlp_len = struct.unpack('B', file.read(1))[0]
+        with open(self.data_path, "rb") as file:
+            wlp_len = struct.unpack("B", file.read(1))[0]
             if not is_wlp_length_valid(wlp_len):
                 return False
 
-            wlp_data = file.read(wlp_len * struct.calcsize('I'))
+            wlp_data = file.read(wlp_len * struct.calcsize("I"))
             self._wlp.frombytes(wlp_data)
             self._data_array = bytearray(file.read())
 
         return is_data_valid(self._wlp, self._data_array)
-
 
     def get_wlp_value_at(self, i: int) -> int:
         """
@@ -76,7 +78,6 @@ class CEFRDataReader:
 
         raise IndexError("Index out of range for _wlp")
 
-
     def get_data_array_value_at(self, i: int) -> int:
         """
         Get the value at index i in the data array.
@@ -95,7 +96,6 @@ class CEFRDataReader:
 
         raise IndexError("Index out of range for _data_array")
 
-
     def get_wlp_len(self) -> int:
         """
         Get the length of the word length positions array.
@@ -104,7 +104,6 @@ class CEFRDataReader:
             int: Length of the word length positions array.
         """
         return len(self._wlp)
-
 
     def get_data_array_len(self) -> int:
         """

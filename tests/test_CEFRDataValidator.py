@@ -9,11 +9,7 @@ class TestCEFRDataValidation(unittest.TestCase):
         self.valid_wlp_lengths = [2, 3, 100, 254, 255]
         self.invalid_wlp_lengths = [-inf, -1, 0, 1, 256, 500, inf]
 
-        self.valid_wlp_arrays = [
-            [0, 9],
-            [0, 6, 10],
-            [3, 6, 6, 6, 12]
-        ]
+        self.valid_wlp_arrays = [[0, 9], [0, 6, 10], [3, 6, 6, 6, 12]]
 
         self.invalid_wlp_arrays = [
             [],
@@ -21,22 +17,22 @@ class TestCEFRDataValidation(unittest.TestCase):
             [0, -1],
             [1, 2, 3, 4, 5],
             [0, 3, 5, 12],
-            [3, 12, 9, 12, 17]
+            [3, 12, 9, 12, 17],
         ]
 
         self.valid_data = [
-            bytearray(b'a\x00\x00d\x03\x05z\x02\x10'),
-            bytearray(b'g\x10\x05y\x04\x89kk\x05\x12'),
-            bytearray(b'---c\x06\x15qwer\x10\x35----')
+            bytearray(b"a\x00\x00d\x03\x05z\x02\x10"),
+            bytearray(b"g\x10\x05y\x04\x89kk\x05\x12"),
+            bytearray(b"---c\x06\x15qwer\x10\x35----"),
         ]
 
         self.invalid_data = [
-            bytearray(b'something\x00\x02test\x00\x01'),
-            bytearray(b'hello'),
-            bytearray(b'c\x06qwer\x10\x35'),
-            bytearray(b'a\x99\x99d\x03\x05z\x02\x10'),
-            bytearray(b'testsomething'),
-            bytearray(b'#\x00\x00@\x03\x05#\x02\x10')
+            bytearray(b"something\x00\x02test\x00\x01"),
+            bytearray(b"hello"),
+            bytearray(b"c\x06qwer\x10\x35"),
+            bytearray(b"a\x99\x99d\x03\x05z\x02\x10"),
+            bytearray(b"testsomething"),
+            bytearray(b"#\x00\x00@\x03\x05#\x02\x10"),
         ]
 
     def test_wlp_length_valid(self):
@@ -67,5 +63,5 @@ class TestCEFRDataValidation(unittest.TestCase):
             self.assertFalse(CEFRDataValidator.is_data_valid(wlp_array, data))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

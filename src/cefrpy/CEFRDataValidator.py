@@ -72,7 +72,7 @@ def validate_data_block(data: bytearray, start_pos: int, block_length: int) -> b
     """
     word_len = block_length - 2
     for i in range(start_pos, start_pos + word_len):
-        if not chr(data[i]) in VALID_WORD_CHARACTERS:
+        if chr(data[i]) not in VALID_WORD_CHARACTERS:
             return False
 
     if data[i + 1] > MAX_POS_TAG_ID:

@@ -3,6 +3,7 @@ import unittest
 from math import inf
 from cefrpy import POSTag
 
+
 class TestPOSTag(unittest.TestCase):
     def setUp(self):
         self.total_tags = POSTag.get_total_tags()
@@ -83,5 +84,5 @@ class TestPOSTag(unittest.TestCase):
             self.assertIsNotNone(POSTag.__members__.get(pos_tag))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

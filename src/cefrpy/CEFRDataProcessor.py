@@ -4,9 +4,10 @@ from typing import Union
 from heapq import heapify, heappush, heappop
 
 from .CEFRDataReader import CEFRDataReader
+from .CEFRDataValidator import VALID_WORD_CHARACTERS
 
 
-class HeapqReverseDataWrapper():
+class HeapqReverseDataWrapper:
     """
     Wrapper class to reverse the ordering of data when using heapq.
 
@@ -22,6 +23,7 @@ class HeapqReverseDataWrapper():
     Methods:
         __lt__(self, other): Less-than comparison method used to determine the ordering of the wrapped data.
     """
+
     def __init__(self, data) -> None:
         """
         Initialize the HeapqReverseDataWrapper instance.
@@ -61,7 +63,6 @@ class CEFRDataProcessor:
         """
         self._data_reader = data_reader
 
-
     def get_max_word_len(self) -> int:
         """
         Get the maximum word length available in the data.
@@ -70,7 +71,6 @@ class CEFRDataProcessor:
             int: The maximum word length.
         """
         return self._data_reader.get_wlp_len() - 1
-
 
     def is_word_len_valid(self, word_len: int) -> bool:
         """
@@ -83,7 +83,6 @@ class CEFRDataProcessor:
             bool: True if the word length is valid, False otherwise.
         """
         return 0 < word_len < self._data_reader.get_wlp_len()
-
 
     def _get_first_word_match_pos(self, word_packed: bytes) -> int:
         """
@@ -123,8 +122,9 @@ class CEFRDataProcessor:
 
         return -1
 
-
-    def _get_int_word_level_for_pos_id(self, word_packed: bytes, pos_tag_id: int, avg_level_not_found_pos: bool = False) -> Union[int, None]:
+    def _get_int_word_level_for_pos_id(
+        self, word_packed: bytes, pos_tag_id: int, avg_level_not_found_pos: bool = False
+    ) -> Union[int, None]:
         """
         Get the packed level of a word's part of speech.
 
@@ -183,7 +183,6 @@ class CEFRDataProcessor:
 
             m = first_match
 
-            
         else:
             while True:
                 m += data_block_len
@@ -224,14 +223,15 @@ class CEFRDataProcessor:
                     i += 1
                 else:
                     founded_pos += 1
-                    level_accumulator += self._data_reader.get_data_array_value_at(i + 1)
+                    level_accumulator += self._data_reader.get_data_array_value_at(
+                        i + 1
+                    )
                     continue
 
                 break
 
         if avg_level_not_found_pos:
             return round(level_accumulator / founded_pos)
-
 
     def _get_word_data_range(self, word: str) -> Union[range, None]:
         """
@@ -245,6 +245,9 @@ class CEFRDataProcessor:
                 If the word is not found in the data or its length is invalid, returns None.
         """
         if not self.is_word_len_valid(len(word)):
+            return
+
+        if not self._is_word_chars_valid(word):
             return
 
         word_packed = self.pack_word(word)
@@ -300,7 +303,6 @@ class CEFRDataProcessor:
 
         return range(start_range, end_range, data_block_len)
 
-
     def get_all_pos_for_word(self, word: str) -> list[int]:
         """
         Retrieves the IDs of all part-of-speech tags associated with a given word.
@@ -309,7 +311,7 @@ class CEFRDataProcessor:
             word (str): The word to retrieve part-of-speech tags for.
 
         Returns:
-            list[int]: A list of IDs representing the part-of-speech tags associated with the word. 
+            list[int]: A list of IDs representing the part-of-speech tags associated with the word.
                 If the word is not found in the data, an empty list is returned.
         """
         data_range = self._get_word_data_range(word)
@@ -322,7 +324,6 @@ class CEFRDataProcessor:
             pos_list.append(pos_tag)
 
         return pos_list
-
 
     def get_pos_level_dict_for_word(self, word: str) -> dict[int, float]:
         """
@@ -349,8 +350,9 @@ class CEFRDataProcessor:
 
         return result
 
-
-    def get_word_level_for_pos_id(self, word: str, pos_tag_id: int, avg_level_not_found_pos: bool = False) -> Union[float, None]:
+    def get_word_level_for_pos_id(
+        self, word: str, pos_tag_id: int, avg_level_not_found_pos: bool = False
+    ) -> Union[float, None]:
         """
         Get the level of a word's part of speech.
 
@@ -365,12 +367,16 @@ class CEFRDataProcessor:
         if not self.is_word_len_valid(len(word)):
             return
 
+        if not self._is_word_chars_valid(word):
+            return
+
         word_packed = self.pack_word(word)
-        level = self._get_int_word_level_for_pos_id(word_packed, pos_tag_id, avg_level_not_found_pos)
+        level = self._get_int_word_level_for_pos_id(
+            word_packed, pos_tag_id, avg_level_not_found_pos
+        )
 
         if level is not None:
             return self.byte_int_level_to_float(level)
-
 
     def is_word_in_database(self, word: str) -> bool:
         """
@@ -385,10 +391,12 @@ class CEFRDataProcessor:
         if not self.is_word_len_valid(len(word)):
             return False
 
+        if not self._is_word_chars_valid(word):
+            return False
+
         word_packed = self.pack_word(word)
 
         return self._get_first_word_match_pos(word_packed) != -1
-
 
     def is_word_pos_id_database(self, word: str, pos_tag_id: int) -> bool:
         """
@@ -402,7 +410,6 @@ class CEFRDataProcessor:
             bool: True if the word is in the database, False otherwise.
         """
         return self.get_word_level_for_pos_id(word, pos_tag_id) is not None
-
 
     def _unpack_word_in_data_array(self, i: int, word_length: int) -> str:
         """
@@ -425,8 +432,9 @@ class CEFRDataProcessor:
 
         return word
 
-
-    def _get_word_yield_start_block_range(self, word_length: int, reverse_order: bool = False):
+    def _get_word_yield_start_block_range(
+        self, word_length: int, reverse_order: bool = False
+    ):
         """
         Get the range of block indices to start yielding words of a specific length.
 
@@ -444,10 +452,13 @@ class CEFRDataProcessor:
         if reverse_order:
             # This approach should be faster than reversed(range(...)):
             # https://stackoverflow.com/a/7286465/15070145
-            return range(segment_end - data_block_len, segment_start - data_block_len, -data_block_len)
+            return range(
+                segment_end - data_block_len,
+                segment_start - data_block_len,
+                -data_block_len,
+            )
 
         return range(segment_start, segment_end, data_block_len)
-
 
     def yield_words_with_length(self, word_length: int, reverse_order: bool = False):
         """
@@ -463,7 +474,9 @@ class CEFRDataProcessor:
         if not self.is_word_len_valid(word_length):
             return
 
-        start_block_range = self._get_word_yield_start_block_range(word_length, reverse_order)
+        start_block_range = self._get_word_yield_start_block_range(
+            word_length, reverse_order
+        )
 
         last_word = None
         for i in start_block_range:
@@ -473,8 +486,9 @@ class CEFRDataProcessor:
                 yield word
                 last_word = word
 
-
-    def yield_word_pos_id_with_length(self, word_length: int, reverse_order: bool = False):
+    def yield_word_pos_id_with_length(
+        self, word_length: int, reverse_order: bool = False
+    ):
         """
         Yield words of a specific length with their associated part-of-speech tag IDs from the database.
 
@@ -489,7 +503,9 @@ class CEFRDataProcessor:
         if not self.is_word_len_valid(word_length):
             return
 
-        start_block_range = self._get_word_yield_start_block_range(word_length, reverse_order)
+        start_block_range = self._get_word_yield_start_block_range(
+            word_length, reverse_order
+        )
 
         for i in start_block_range:
             word = self._unpack_word_in_data_array(i, word_length)
@@ -497,8 +513,9 @@ class CEFRDataProcessor:
 
             yield (word, word_pos)
 
-
-    def yield_word_pos_level_with_length(self, word_length: int, reverse_order: bool = False):
+    def yield_word_pos_level_with_length(
+        self, word_length: int, reverse_order: bool = False
+    ):
         """
         Yield words of a specific length with their part-of-speech tag IDs and levels from the database.
 
@@ -513,7 +530,9 @@ class CEFRDataProcessor:
         if not self.is_word_len_valid(word_length):
             return
 
-        start_block_range = self._get_word_yield_start_block_range(word_length, reverse_order)
+        start_block_range = self._get_word_yield_start_block_range(
+            word_length, reverse_order
+        )
 
         for i in start_block_range:
             word = self._unpack_word_in_data_array(i, word_length)
@@ -525,8 +544,12 @@ class CEFRDataProcessor:
 
             yield (word, word_pos, word_level_float)
 
-
-    def _yield_all_data(self, yield_method_with_word_length: callable, reverse_order: bool, word_lenght_sort: bool):
+    def _yield_all_data(
+        self,
+        yield_method_with_word_length: callable,
+        reverse_order: bool,
+        word_lenght_sort: bool,
+    ):
         """
         Yields data from various generators based on word length.
 
@@ -552,7 +575,10 @@ class CEFRDataProcessor:
 
             return
 
-        generators = [yield_method_with_word_length(i, reverse_order) for i in range(1, max_word_len + 1)]
+        generators = [
+            yield_method_with_word_length(i, reverse_order)
+            for i in range(1, max_word_len + 1)
+        ]
         words_heap = []
         heapify(words_heap)
 
@@ -593,7 +619,6 @@ class CEFRDataProcessor:
             except StopIteration:
                 pass
 
-
     def yield_words(self, reverse_order: bool = False, word_lenght_sort: bool = False):
         """
         Yield all words in the database.
@@ -605,10 +630,13 @@ class CEFRDataProcessor:
         Yields:
             str: A word from the database.
         """
-        return self._yield_all_data(self.yield_words_with_length, reverse_order, word_lenght_sort)
+        return self._yield_all_data(
+            self.yield_words_with_length, reverse_order, word_lenght_sort
+        )
 
-
-    def yield_word_pos_id(self, reverse_order: bool = False, word_lenght_sort: bool = False):
+    def yield_word_pos_id(
+        self, reverse_order: bool = False, word_lenght_sort: bool = False
+    ):
         """
         Yield words with their part-of-speech tag IDs from the database.
 
@@ -619,10 +647,13 @@ class CEFRDataProcessor:
         Yields:
             tuple[str, int]: A tuple containing a word from the database and its associated part-of-speech tag ID.
         """
-        return self._yield_all_data(self.yield_word_pos_id_with_length, reverse_order, word_lenght_sort)
+        return self._yield_all_data(
+            self.yield_word_pos_id_with_length, reverse_order, word_lenght_sort
+        )
 
-
-    def yield_word_pos_level(self, reverse_order: bool = False, word_lenght_sort: bool = False):
+    def yield_word_pos_level(
+        self, reverse_order: bool = False, word_lenght_sort: bool = False
+    ):
         """
         Yield words with their part-of-speech tag IDs and levels from the database.
 
@@ -634,8 +665,9 @@ class CEFRDataProcessor:
             tuple[str, int, float]: A tuple containing a word from the database, its associated part-of-speech tag ID,
                 and its level.
         """
-        return self._yield_all_data(self.yield_word_pos_level_with_length, reverse_order, word_lenght_sort)
-
+        return self._yield_all_data(
+            self.yield_word_pos_level_with_length, reverse_order, word_lenght_sort
+        )
 
     def get_word_count_for_length(self, word_length: int) -> int:
         """
@@ -664,12 +696,13 @@ class CEFRDataProcessor:
 
                     for k in range(j + 1, word_length):
                         array_pos += 1
-                        last_word[k] = self._data_reader.get_data_array_value_at(array_pos)
+                        last_word[k] = self._data_reader.get_data_array_value_at(
+                            array_pos
+                        )
 
                     break
 
         return unique_words_counter
-
 
     def get_total_words(self) -> int:
         """
@@ -685,7 +718,6 @@ class CEFRDataProcessor:
             counter += self.get_word_count_for_length(length)
 
         return counter
-
 
     def get_word_pos_count_for_length(self, word_length: int) -> int:
         """
@@ -706,7 +738,6 @@ class CEFRDataProcessor:
 
         return (segment_end - segment_start) // data_block_len
 
-
     def get_word_pos_count(self) -> int:
         """
         Get the total count of positions in the data where words start, across all word lengths.
@@ -722,7 +753,6 @@ class CEFRDataProcessor:
 
         return counter
 
-
     @staticmethod
     def pack_word(word: str) -> bytes:
         """
@@ -734,8 +764,24 @@ class CEFRDataProcessor:
         Returns:
             bytes: The packed representation of the word.
         """
-        return struct.pack('B' * len(word), *map(ord, word))
+        return struct.pack("B" * len(word), *map(ord, word))
 
+    @staticmethod
+    def _is_word_chars_valid(word: str) -> bool:
+        """
+        Check whether every character in the word is a valid lowercase ASCII letter.
+
+        Non-ASCII characters (e.g. 'あ', 'é', '中') would cause struct.pack to raise
+        an error, so we reject them early and return None/False from callers instead
+        of crashing.
+
+        Args:
+            word (str): The word to validate.
+
+        Returns:
+            bool: True if all characters are valid, False otherwise.
+        """
+        return all(c in VALID_WORD_CHARACTERS for c in word)
 
     @staticmethod
     def byte_int_level_to_float(level: int) -> float:
