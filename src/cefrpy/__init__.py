@@ -5,5 +5,5 @@ from .CEFRLevel import CEFRLevel
 from .CEFRAnalyzer import CEFRAnalyzer
 from .CEFRSpaCyAnalyzer import CEFRSpaCyAnalyzer
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __all__ = ["POSTag", "CEFRDataReader", "CEFRDataProcessor", "CEFRLevel", "CEFRAnalyzer", "CEFRSpaCyAnalyzer"]

@@ -1,7 +1,7 @@
 import unittest
 
 from random import randint
-from cefrpy import CEFRAnalyzer, CEFRDataReader, POSTag, CEFRLevel
+from cefrpy import CEFRAnalyzer, POSTag, CEFRLevel
 
 
 class TestCEFRAnalyzer(unittest.TestCase):
@@ -11,7 +11,12 @@ class TestCEFRAnalyzer(unittest.TestCase):
         cls.valid_word_pos = POSTag.NN
         cls.valid_word_unknown_pos = POSTag.CD
         cls.not_valid_words_test_pos_tag = POSTag.CC
-        cls.not_valid_words = ("", "@test@", "notvalidword", "toolongwordtoolongwordtoolongwordtoolongwordtoolongword")
+        cls.not_valid_words = (
+            "",
+            "@test@",
+            "notvalidword",
+            "toolongwordtoolongwordtoolongwordtoolongwordtoolongword",
+        )
         cls.analyzer = CEFRAnalyzer()
 
     def test_get_max_word_len(self):
@@ -26,30 +31,58 @@ class TestCEFRAnalyzer(unittest.TestCase):
         self.assertEqual(CEFRAnalyzer.get_pos_tag_id(tag_str), tag_id)
 
     def test_get_word_pos_level_float(self):
-        valid_word_pos_level = self.analyzer.get_word_pos_level_float(self.valid_word, self.valid_word_pos, False)
-        valid_avg_word_pos_level = self.analyzer.get_word_pos_level_float(self.valid_word, self.valid_word_unknown_pos, True)
-        none_level = self.analyzer.get_word_pos_level_float(self.valid_word, self.valid_word_unknown_pos, False)
+        valid_word_pos_level = self.analyzer.get_word_pos_level_float(
+            self.valid_word, self.valid_word_pos, False
+        )
+        valid_avg_word_pos_level = self.analyzer.get_word_pos_level_float(
+            self.valid_word, self.valid_word_unknown_pos, True
+        )
+        none_level = self.analyzer.get_word_pos_level_float(
+            self.valid_word, self.valid_word_unknown_pos, False
+        )
 
         self.assertIsNotNone(valid_word_pos_level)
         self.assertIsNotNone(valid_avg_word_pos_level)
         self.assertIsNone(none_level)
 
         for word in self.not_valid_words:
-            self.assertIsNone(self.analyzer.get_word_pos_level_float(word, self.not_valid_words_test_pos_tag, False))
-            self.assertIsNone(self.analyzer.get_word_pos_level_float(word, self.not_valid_words_test_pos_tag, True))
+            self.assertIsNone(
+                self.analyzer.get_word_pos_level_float(
+                    word, self.not_valid_words_test_pos_tag, False
+                )
+            )
+            self.assertIsNone(
+                self.analyzer.get_word_pos_level_float(
+                    word, self.not_valid_words_test_pos_tag, True
+                )
+            )
 
     def test_get_word_pos_level_CEFR(self):
-        valid_word_pos_level = self.analyzer.get_word_pos_level_CEFR(self.valid_word, self.valid_word_pos, False)
-        valid_avg_word_pos_level = self.analyzer.get_word_pos_level_CEFR(self.valid_word, self.valid_word_unknown_pos, True)
-        none_level = self.analyzer.get_word_pos_level_CEFR(self.valid_word, self.valid_word_unknown_pos, False)
+        valid_word_pos_level = self.analyzer.get_word_pos_level_CEFR(
+            self.valid_word, self.valid_word_pos, False
+        )
+        valid_avg_word_pos_level = self.analyzer.get_word_pos_level_CEFR(
+            self.valid_word, self.valid_word_unknown_pos, True
+        )
+        none_level = self.analyzer.get_word_pos_level_CEFR(
+            self.valid_word, self.valid_word_unknown_pos, False
+        )
 
         self.assertIsInstance(valid_word_pos_level, CEFRLevel)
         self.assertIsInstance(valid_avg_word_pos_level, CEFRLevel)
         self.assertIsNone(none_level)
 
         for word in self.not_valid_words:
-            self.assertIsNone(self.analyzer.get_word_pos_level_float(word, self.not_valid_words_test_pos_tag, False))
-            self.assertIsNone(self.analyzer.get_word_pos_level_float(word, self.not_valid_words_test_pos_tag, True))
+            self.assertIsNone(
+                self.analyzer.get_word_pos_level_float(
+                    word, self.not_valid_words_test_pos_tag, False
+                )
+            )
+            self.assertIsNone(
+                self.analyzer.get_word_pos_level_float(
+                    word, self.not_valid_words_test_pos_tag, True
+                )
+            )
 
     def test_get_avg_word_level_float(self):
         valid_word_level = self.analyzer.get_average_word_level_float(self.valid_word)
@@ -72,11 +105,21 @@ class TestCEFRAnalyzer(unittest.TestCase):
             self.assertFalse(self.analyzer.is_word_in_database(word))
 
     def test_is_word_pos_in_database(self):
-        self.assertTrue(self.analyzer.is_word_pos_id_database(self.valid_word, self.valid_word_pos))
-        self.assertFalse(self.analyzer.is_word_pos_id_database(self.valid_word, self.valid_word_unknown_pos))
+        self.assertTrue(
+            self.analyzer.is_word_pos_id_database(self.valid_word, self.valid_word_pos)
+        )
+        self.assertFalse(
+            self.analyzer.is_word_pos_id_database(
+                self.valid_word, self.valid_word_unknown_pos
+            )
+        )
 
         for word in self.not_valid_words:
-            self.assertFalse(self.analyzer.is_word_pos_id_database(word, self.not_valid_words_test_pos_tag))
+            self.assertFalse(
+                self.analyzer.is_word_pos_id_database(
+                    word, self.not_valid_words_test_pos_tag
+                )
+            )
 
     def test_yields(self):
         valid_word_len = len(self.valid_word)
@@ -94,7 +137,9 @@ class TestCEFRAnalyzer(unittest.TestCase):
         self.assertEqual(len(valid_words), total_words)
 
         valid_words_iter = reversed(valid_words)
-        for word in self.analyzer.yield_words_with_length(valid_word_len, reverse_order=True):
+        for word in self.analyzer.yield_words_with_length(
+            valid_word_len, reverse_order=True
+        ):
             self.assertEqual(next(valid_words_iter), word)
 
         with self.assertRaises(StopIteration):
@@ -104,8 +149,14 @@ class TestCEFRAnalyzer(unittest.TestCase):
         word = next(valid_words_iter)
         word_pos_counter = 0
 
-        for data1, data2 in zip(self.analyzer.yield_word_pos_with_length(valid_word_len, pos_tag_as_string=False),
-                                self.analyzer.yield_word_pos_level_with_length(valid_word_len, pos_tag_as_string=True)):
+        for data1, data2 in zip(
+            self.analyzer.yield_word_pos_with_length(
+                valid_word_len, pos_tag_as_string=False
+            ),
+            self.analyzer.yield_word_pos_level_with_length(
+                valid_word_len, pos_tag_as_string=True
+            ),
+        ):
             word1, pos1 = data1
             word2, pos2, level = data2
 
@@ -130,8 +181,17 @@ class TestCEFRAnalyzer(unittest.TestCase):
         word = next(valid_words_iter)
         word_pos_counter = 0
 
-        for data1, data2 in zip(self.analyzer.yield_word_pos_with_length(valid_word_len, pos_tag_as_string=True, reverse_order=True),
-                                self.analyzer.yield_word_pos_level_with_length(valid_word_len, pos_tag_as_string=False, word_level_as_float=True, reverse_order=True)):
+        for data1, data2 in zip(
+            self.analyzer.yield_word_pos_with_length(
+                valid_word_len, pos_tag_as_string=True, reverse_order=True
+            ),
+            self.analyzer.yield_word_pos_level_with_length(
+                valid_word_len,
+                pos_tag_as_string=False,
+                word_level_as_float=True,
+                reverse_order=True,
+            ),
+        ):
             word1, pos1 = data1
             word2, pos2, level = data2
 
@@ -159,7 +219,9 @@ class TestCEFRAnalyzer(unittest.TestCase):
         word_counter = 0
         last_word = ""
 
-        for word in self.analyzer.yield_words(reverse_order=False, word_length_sort=False):
+        for word in self.analyzer.yield_words(
+            reverse_order=False, word_length_sort=False
+        ):
             self.assertGreater(word, last_word)
             last_word = word
             word_counter += 1
@@ -167,7 +229,9 @@ class TestCEFRAnalyzer(unittest.TestCase):
         self.assertEqual(word_counter, total_words)
 
         word_counter = 1
-        generator = self.analyzer.yield_words(reverse_order=True, word_length_sort=False)
+        generator = self.analyzer.yield_words(
+            reverse_order=True, word_length_sort=False
+        )
         last_word = next(generator)
 
         for word in generator:
@@ -185,7 +249,9 @@ class TestCEFRAnalyzer(unittest.TestCase):
         last_len = 0
         last_word = ""
 
-        for word in self.analyzer.yield_words(reverse_order=False, word_length_sort=True):
+        for word in self.analyzer.yield_words(
+            reverse_order=False, word_length_sort=True
+        ):
             word_len = len(word)
             self.assertGreaterEqual(word_len, last_len)
 
@@ -219,5 +285,5 @@ class TestCEFRAnalyzer(unittest.TestCase):
         self.assertEqual(word_counter, total_words)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -1,6 +1,16 @@
 # About cefrpy
 
+![PyPI - License](https://img.shields.io/pypi/l/cefrpy)
+![PyPI - Version](https://img.shields.io/pypi/v/cefrpy)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/cefrpy)
+[![Hugging Face Space](https://img.shields.io/badge/Hugging%20Face-Space-4CA6A7?logo=huggingface&style=flat)](https://huggingface.co/spaces/Maximax67/cefrpy-demo)
+[![Unit Tests](https://github.com/Maximax67/cefrpy/actions/workflows/unittest.yml/badge.svg)](https://github.com/Maximax67/cefrpy/actions/workflows/unittest.yml)
+
 The cefrpy python module offers a comprehensive toolkit for analyzing linguistic data based on the Common European Framework of Reference for Languages (CEFR).
+
+Documentation: <https://maximax67.github.io/cefrpy/>
+
+HuggingFace demo: <https://huggingface.co/spaces/Maximax67/cefrpy-demo>
 
 # Installation
 
@@ -36,7 +46,7 @@ else:
     print(f"CEFR level not found for '{word}' as a {pos_tag}.")
 ```
 
-## Getting average level of a word:
+## Getting average level of a word
 
 ```py
 from cefrpy import CEFRAnalyzer
@@ -61,7 +71,8 @@ else:
 
 ## Recommended usage with [spaCy](https://spacy.io)
 
-### Import spacy and load model:
+### Import spacy and load model
+
 ```py
 import spacy
 
@@ -136,179 +147,179 @@ for token in tokens:
 
 Result (truncated):
 
-```
+```text
 -------------------------------------------------------
- WORD                      	POS	LEVEL	CEFR
+ WORD                       POS LEVEL CEFR
 -------------------------------------------------------
-                          	_SP	Skip	None
-In                        	IN	1.00	A1
-the                       	DT	1.00	A1
-heart                     	NN	1.00	A1
-of                        	IN	1.00	A1
-every                     	DT	1.00	A1
-forest                    	NN	2.00	A2
-,                         	,	Skip	None
-a                         	DT	1.00	A1
-hidden                    	JJ	3.00	B1
-world                     	NN	1.00	A1
-thrives                   	VBZ	5.86	C2
-among                     	IN	2.00	A2
-the                       	DT	1.00	A1
-towering                  	VBG	1.00	A1
-trees                     	NNS	1.00	A1
-.                         	.	Skip	None
-Trees                     	NNS	1.00	A1
-,                         	,	Skip	None
-                          	_SP	Skip	None
-those                     	DT	1.00	A1
-silent                    	JJ	3.00	B1
+                           _SP Skip None
+In                         IN 1.00 A1
+the                        DT 1.00 A1
+heart                      NN 1.00 A1
+of                         IN 1.00 A1
+every                      DT 1.00 A1
+forest                     NN 2.00 A2
+,                          , Skip None
+a                          DT 1.00 A1
+hidden                     JJ 3.00 B1
+world                      NN 1.00 A1
+thrives                    VBZ 5.86 C2
+among                      IN 2.00 A2
+the                        DT 1.00 A1
+towering                   VBG 1.00 A1
+trees                      NNS 1.00 A1
+.                          . Skip None
+Trees                      NNS 1.00 A1
+,                          , Skip None
+                           _SP Skip None
+those                      DT 1.00 A1
+silent                     JJ 3.00 B1
 ```
 
 ### Get more statistical information
 
 1. Filter tokens by level:
 
-```py
-def filter_for_desired_level(level_tokens: list[tuple[str, str, bool, float, int, int]],
-                            min_level: float | int = 1.0, max_level: float | int = 6.0
-                            ) -> set[tuple[str, str, bool, float, int, int]]:
-    filtered_tokens = set()
-    for token in level_tokens:
-        level = token[3]
+    ```py
+    def filter_for_desired_level(level_tokens: list[tuple[str, str, bool, float, int, int]],
+                                min_level: float | int = 1.0, max_level: float | int = 6.0
+                                ) -> set[tuple[str, str, bool, float, int, int]]:
+        filtered_tokens = set()
+        for token in level_tokens:
+            level = token[3]
 
-        if level and level >= min_level and level <= max_level:
-            filtered_tokens.add(token)
+            if level and level >= min_level and level <= max_level:
+                filtered_tokens.add(token)
 
-    return filtered_tokens
+        return filtered_tokens
 
 
-# You can also set min/max level as an int or float in range from 1 to 6
-desired_min_level = CEFRLevel.C1
-desired_level_words_set = filter_for_desired_level(tokens, min_level=int(desired_min_level))
+    # You can also set min/max level as an int or float in range from 1 to 6
+    desired_min_level = CEFRLevel.C1
+    desired_level_words_set = filter_for_desired_level(tokens, min_level=int(desired_min_level))
 
-desired_level_words_list = list(desired_level_words_set)
-desired_level_words_list.sort()
+    desired_level_words_list = list(desired_level_words_set)
+    desired_level_words_list.sort()
 
-print(f'\tWords with level {desired_min_level} and higher: {len(desired_level_words_list)}')
-for word_data in desired_level_words_list:
-    word, pos, _, level, _, _ = word_data
-    print(f"{word.ljust(26)} {pos.ljust(6)} {'{:.2f}'.format(level).ljust(6)} {CEFRLevel(round(level))}")
-```
+    print(f'\tWords with level {desired_min_level} and higher: {len(desired_level_words_list)}')
+    for word_data in desired_level_words_list:
+        word, pos, _, level, _, _ = word_data
+        print(f"{word.ljust(26)} {pos.ljust(6)} {'{:.2f}'.format(level).ljust(6)} {CEFRLevel(round(level))}")
+    ```
 
-```
-Words with level B2 and higher: 16
-benefactors                NNS    6.00   C2
-bristlecone                NN     6.00   C2
-evolved                    VBN    4.00   B2
-fungi                      NNS    5.20   C1
-living                     NN     4.00   B2
-longevity                  NN     5.96   C2
-masters                    NNS    4.00   B2
-mighty                     JJ     4.00   B2
-observers                  NNS    4.00   B2
-pines                      NNS    4.00   B2
-potential                  JJ     4.00   B2
-sequoias                   NNS    6.00   C2
-thrives                    VBZ    5.86   C2
-underground                RB     4.00   B2
-wildfires                  NNS    6.00   C2
-withstand                  VB     5.12   C1
-```
+    ```text
+    Words with level B2 and higher: 16
+    benefactors                NNS    6.00   C2
+    bristlecone                NN     6.00   C2
+    evolved                    VBN    4.00   B2
+    fungi                      NNS    5.20   C1
+    living                     NN     4.00   B2
+    longevity                  NN     5.96   C2
+    masters                    NNS    4.00   B2
+    mighty                     JJ     4.00   B2
+    observers                  NNS    4.00   B2
+    pines                      NNS    4.00   B2
+    potential                  JJ     4.00   B2
+    sequoias                   NNS    6.00   C2
+    thrives                    VBZ    5.86   C2
+    underground                RB     4.00   B2
+    wildfires                  NNS    6.00   C2
+    withstand                  VB     5.12   C1
+    ```
 
 2. Get CEFR statistic of the text:
 
-```py
-def get_word_level_count_statistic(level_tokens: list[tuple[str, str, bool, float, int, int]]) -> list[int]:
-    difficulty_levels_count = [0] * 6
-    for token in level_tokens:
-        level = token[3]
-        if not level:
-            continue
+    ```py
+    def get_word_level_count_statistic(level_tokens: list[tuple[str, str, bool, float, int, int]]) -> list[int]:
+        difficulty_levels_count = [0] * 6
+        for token in level_tokens:
+            level = token[3]
+            if not level:
+                continue
 
-        level_round = round(level)
-        difficulty_levels_count[level_round - 1] += 1
+            level_round = round(level)
+            difficulty_levels_count[level_round - 1] += 1
 
-    return difficulty_levels_count
+        return difficulty_levels_count
 
-difficulty_levels_count = get_word_level_count_statistic(tokens)
-print('CEFR statistic (total words):')
-for i in range(1, 7):
-    print(f'{CEFRLevel(i)}: {difficulty_levels_count[i - 1]}')
-```
+    difficulty_levels_count = get_word_level_count_statistic(tokens)
+    print('CEFR statistic (total words):')
+    for i in range(1, 7):
+        print(f'{CEFRLevel(i)}: {difficulty_levels_count[i - 1]}')
+    ```
 
-```
-CEFR statistic (total words):
-A1: 136
-A2: 36
-B1: 27
-B2: 11
-C1: 2
-C2: 6
-```
+    ```text
+    CEFR statistic (total words):
+    A1: 136
+    A2: 36
+    B1: 27
+    B2: 11
+    C1: 2
+    C2: 6
+    ```
 
 3. Get CEFR statistic for unique words in the text:
 
-```py
-def get_word_level_count_statistic_unique(level_tokens: list[tuple[str, str, bool, float, int, int]]) -> list[int]:
-    processed_word_pos_set = set()
-    difficulty_levels_count = [0] * 6
-    for token in level_tokens:
-        level = token[3]
-        if not level:
-            continue
+    ```py
+    def get_word_level_count_statistic_unique(level_tokens: list[tuple[str, str, bool, float, int, int]]) -> list[int]:
+        processed_word_pos_set = set()
+        difficulty_levels_count = [0] * 6
+        for token in level_tokens:
+            level = token[3]
+            if not level:
+                continue
 
-        to_check_tuple = (token[0], token[1])
-        if not to_check_tuple in processed_word_pos_set:
-            level_round = round(token[3])
-            difficulty_levels_count[level_round - 1] += 1
-            processed_word_pos_set.add(to_check_tuple)
+            to_check_tuple = (token[0], token[1])
+            if not to_check_tuple in processed_word_pos_set:
+                level_round = round(token[3])
+                difficulty_levels_count[level_round - 1] += 1
+                processed_word_pos_set.add(to_check_tuple)
 
-    return difficulty_levels_count
+        return difficulty_levels_count
 
 
-difficulty_levels_count_unique = get_word_level_count_statistic_unique(tokens)
-print('CEFR statistic (unique words):')
-for i in range(1, 7):
-    print(f'{CEFRLevel(i)}: {difficulty_levels_count_unique[i - 1]}')
-```
+    difficulty_levels_count_unique = get_word_level_count_statistic_unique(tokens)
+    print('CEFR statistic (unique words):')
+    for i in range(1, 7):
+        print(f'{CEFRLevel(i)}: {difficulty_levels_count_unique[i - 1]}')
+    ```
 
-```
-CEFR statistic (unique words):
-A1: 77
-A2: 33
-B1: 23
-B2: 11
-C1: 2
-C2: 6
-```
+    ```text
+    CEFR statistic (unique words):
+    A1: 77
+    A2: 33
+    B1: 23
+    B2: 11
+    C1: 2
+    C2: 6
+    ```
 
 4. Get set of not found CEFR levels for words in text:
 
-```py
-def get_not_found_words(level_tokens: list[tuple[str, str, bool, float, int, int]]) -> set[str]:
-    not_found_words = set()
-    for token in level_tokens:
-        if token[2]:
-            continue
+    ```py
+    def get_not_found_words(level_tokens: list[tuple[str, str, bool, float, int, int]]) -> set[str]:
+        not_found_words = set()
+        for token in level_tokens:
+            if token[2]:
+                continue
 
-        if not token[3]:
-            not_found_words.add(token[0])
+            if not token[3]:
+                not_found_words.add(token[0])
 
-    return not_found_words
+        return not_found_words
 
 
-not_found_words_set = get_not_found_words(tokens)
-not_found_words_list = list(not_found_words_set)
-not_found_words_list.sort()
+    not_found_words_set = get_not_found_words(tokens)
+    not_found_words_list = list(not_found_words_set)
+    not_found_words_list.sort()
 
-print('Not found words:', len(not_found_words_list))
-if len(not_found_words_list):
-    print('\n'.join(not_found_words_list))
-```
+    print('Not found words:', len(not_found_words_list))
+    if len(not_found_words_list):
+        print('\n'.join(not_found_words_list))
+    ```
 
-```
-Not found words: 0
-```
+    ```text
+    Not found words: 0
+    ```
 
 # Additional features
 
@@ -329,7 +340,7 @@ print(analyzer.get_pos_level_dict_for_word("test"))
 print(analyzer.get_pos_level_dict_for_word("test", pos_tag_as_string=True, word_level_as_float=True))
 ```
 
-## Checking if a word exists in the database
+### Checking if a word exists in the database
 
 ```py
 from cefrpy import CEFRAnalyzer
@@ -411,6 +422,7 @@ analyzer = CEFRAnalyzer()
 ```
 
 ### Iterating over words with a specific length (alphabetical order)
+
 ```py
 iteration_limit = 10
 word_list = []
@@ -469,7 +481,7 @@ for word, pos_tag in analyzer.yield_word_pos(word_length_sort=True):
 print(word_pos_list)
 ```
 
-### Iterating over words with their pos as str and levels as float in reversed alphabetical order with word length priority descending 
+### Iterating over words with their pos as str and levels as float in reversed alphabetical order with word length priority descending
 
 ```py
 iteration_limit = 3
@@ -484,12 +496,14 @@ for word, pos_tag, level in analyzer.yield_word_pos_level(word_length_sort=True,
 print(word_pos_list)
 ```
 
-
 # License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 # Acknowledgments
+
 I would like to acknowledge the contributions of the following resources. I used them to create my initial SQLite version [Words-CEFR-Dataset](https://github.com/Maximax67/Words-CEFR-Dataset):
+
 - [Spacy](https://spacy.io/)
 - [CEFR-J](https://cefr-j.org/)
 - [LemmInflect](https://github.com/bjascob/LemmInflect)
@@ -497,6 +511,7 @@ I would like to acknowledge the contributions of the following resources. I used
 - [List of pos tags form Penn Treebank Project](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)
 
 Also I used these resources to create my [valid English words list](https://github.com/Maximax67/English-Valid-Words):
+
 - [Word list by infochimps (archived)](https://web.archive.org/web/20131118073324/https://www.infochimps.com/datasets/word-list-350000-simple-english-words-excel-readable)
 - [English words github repo by dwyl](https://github.com/dwyl/english-words)
 - [NLTK (Natural Language Toolkit)](https://www.nltk.org/)

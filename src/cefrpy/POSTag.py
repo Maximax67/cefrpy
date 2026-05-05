@@ -1,35 +1,36 @@
 from enum import Enum, unique
 
 POS_TAGS_DESCRIPTIONS = [
-    'Coordinating conjunction',
-    'Cardinal number',
-    'Determiner',
-    'Preposition or subordinating conjunction',
-    'Adjective',
-    'Adjective, comparative',
-    'Adjective, superlative',
-    'Modal',
-    'Noun, singular or mass',
-    'Noun, plural',
-    'Proper noun, singular',
-    'Proper noun, plural',
-    'Personal/Posessive pronoun',
-    'Adverb',
-    'Adverb, comparative',
-    'Adverb, superlative',
-    'Particle',
-    'To',
-    'Interjection',
-    'Verb, base form',
-    'Verb, past tense',
-    'Verb, gerund or present participle',
-    'Verb, past participle',
-    'Verb, non-3rd person singular present',
-    'Verb, 3rd person singular present',
-    'Wh-determiner',
-    'Wh-pronoun',
-    'Wh-adverb'
+    "Coordinating conjunction",
+    "Cardinal number",
+    "Determiner",
+    "Preposition or subordinating conjunction",
+    "Adjective",
+    "Adjective, comparative",
+    "Adjective, superlative",
+    "Modal",
+    "Noun, singular or mass",
+    "Noun, plural",
+    "Proper noun, singular",
+    "Proper noun, plural",
+    "Personal/Posessive pronoun",
+    "Adverb",
+    "Adverb, comparative",
+    "Adverb, superlative",
+    "Particle",
+    "To",
+    "Interjection",
+    "Verb, base form",
+    "Verb, past tense",
+    "Verb, gerund or present participle",
+    "Verb, past participle",
+    "Verb, non-3rd person singular present",
+    "Verb, 3rd person singular present",
+    "Wh-determiner",
+    "Wh-pronoun",
+    "Wh-adverb",
 ]
+
 
 @unique
 class POSTag(Enum):
@@ -66,20 +67,17 @@ class POSTag(Enum):
     WP = 26
     WRB = 27
 
-
     def __str__(self) -> str:
         """
         Returns a string representation of the POS tag.
         """
         return self.name
 
-
     def __int__(self) -> int:
         """
         Returns an integer representation of the POS tag.
         """
         return self.value
-
 
     def __eq__(self, other) -> bool:
         """
@@ -90,20 +88,17 @@ class POSTag(Enum):
 
         return NotImplemented
 
-
     def __hash__(self) -> int:
         """
         Returns the hash value of the POS tag.
         """
         return self.value
 
-
     def get_description(self) -> str:
         """
         Retrieve the description of a POS tag.
         """
         return POS_TAGS_DESCRIPTIONS[self.value]
-
 
     @classmethod
     def from_tag_name(cls, tag_name: str):
@@ -125,7 +120,6 @@ class POSTag(Enum):
 
         return tag
 
-
     @staticmethod
     def get_id_by_tag_name(tag_name: str) -> int:
         """
@@ -144,7 +138,6 @@ class POSTag(Enum):
             raise ValueError(f"Invalid tag name: {tag_name}")
 
         return POSTag[tag_name].value
-
 
     @staticmethod
     def get_tag_name_by_id(tag_id: int) -> str:
@@ -165,7 +158,6 @@ class POSTag(Enum):
 
         raise ValueError(f"Invalid tag id: {tag_id}")
 
-
     @staticmethod
     def get_description_by_tag_name(tag_name: str) -> str:
         """
@@ -183,7 +175,6 @@ class POSTag(Enum):
         tag_id = POSTag.get_id_by_tag_name(tag_name)
 
         return POS_TAGS_DESCRIPTIONS[tag_id]
-
 
     @staticmethod
     def get_description_by_tag_id(tag_id: int) -> str:
@@ -204,7 +195,6 @@ class POSTag(Enum):
 
         return POS_TAGS_DESCRIPTIONS[tag_id]
 
-
     @staticmethod
     def get_total_tags() -> int:
         """
@@ -214,7 +204,6 @@ class POSTag(Enum):
             int: The total number of POS tags.
         """
         return len(POSTag.__members__)
-
 
     @staticmethod
     def get_all_tags() -> list[str]:

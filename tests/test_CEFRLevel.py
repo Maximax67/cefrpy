@@ -2,9 +2,17 @@ import unittest
 
 from cefrpy import CEFRLevel
 
+
 class TestCEFRLevel(unittest.TestCase):
     def setUp(self):
-        self.levels = [CEFRLevel.A1, CEFRLevel.A2, CEFRLevel.B1, CEFRLevel.B2, CEFRLevel.C1, CEFRLevel.C2]
+        self.levels = [
+            CEFRLevel.A1,
+            CEFRLevel.A2,
+            CEFRLevel.B1,
+            CEFRLevel.B2,
+            CEFRLevel.C1,
+            CEFRLevel.C2,
+        ]
 
     def test_equality(self):
         for level in self.levels:
@@ -48,5 +56,5 @@ class TestCEFRLevel(unittest.TestCase):
             self.assertEqual(level_from_str, level)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
