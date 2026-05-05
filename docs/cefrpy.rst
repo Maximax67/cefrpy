@@ -67,4 +67,4 @@ Module contents
    :members:
    :undoc-members:
    :show-inheritance:
-   :no-idex:
+   :no-index:
