@@ -14,6 +14,9 @@ class CEFRLevel(Enum):
     C1 = 5
     C2 = 6
 
+    # reuse Enum hashing, ignored by default when __eq__ is defined
+    __hash__ = Enum.__hash__
+
     def __str__(self) -> str:
         """
         Returns a string representation of the CEFR level.
